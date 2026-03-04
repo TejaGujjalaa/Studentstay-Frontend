@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StudentStay - Accommodation Finder</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        input {
+            padding: 10px;
+            width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        button {
+            padding: 8px 12px;
+            background: #3498db;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>StudentStay</h1>
+    <p>Find your perfect student accommodation</p>
+</header>
+
+<div class="container">
+
+    <input type="text" id="searchInput" placeholder="Search by city..." onkeyup="searchRooms()">
+
+    <div id="roomList"></div>
+
+</div>
+
+<script>
+    const rooms = [
+        { city: "Hyderabad", price: 8000, type: "PG" },
+        { city: "Bangalore", price: 10000, type: "Hostel" },
+        { city: "Chennai", price: 7000, type: "PG" },
+        { city: "Delhi", price: 12000, type: "Apartment" }
+    ];
+
+    function displayRooms(roomArray) {
+        const roomList = document.getElementById("roomList");
+        roomList.innerHTML = "";
+
+        roomArray.forEach(room => {
+            roomList.innerHTML += `
+                <div class="card">
+                    <h3>${room.city}</h3>
+                    <p>Type: ${room.type}</p>
+                    <p>Price: ₹${room.price}</p>
+                    <button>View Details</button>
+                </div>
+            `;
+        });
+    }
+
+    function searchRooms() {
+        const searchValue = document.getElementById("searchInput").value.toLowerCase();
+
+        const filteredRooms = rooms.filter(room =>
+            room.city.toLowerCase().includes(searchValue)
+        );
+
+        displayRooms(filteredRooms);
+    }
+
+    // Initial load
+    displayRooms(rooms);
+</script>
+
+</body>
+</html>
